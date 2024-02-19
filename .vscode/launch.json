@@ -7,7 +7,7 @@
         "name": "Launch Chrome",
         "request": "launch",
         "type": "chrome",
-        "url": "http://localhost:8080/autoavaluacion_pedro_lopez/public/",
+        "url": "http://localhost:8080/autoevaluacion_pedro_lopez/public/",
         "webRoot": "${workspaceFolder}"
     },
         {
