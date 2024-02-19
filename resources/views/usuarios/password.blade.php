@@ -23,7 +23,7 @@
             <div class="form-group row px-2 mt-3">
                 <label for="currentContrasenya" class="col-sm-2 col-form-label">Contraseña Actual</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="currentContrasenya" name="currentContrasenya" value="{{$usuari->contrasenya}}">
+                  <input type="password" class="form-control" id="currentContrasenya" name="currentContrasenya" value="">
                 </div>
             </div>
 

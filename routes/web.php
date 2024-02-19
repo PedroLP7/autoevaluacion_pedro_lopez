@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('prueba');
 });
 Route::get('usuaris/{usuari}/showpass', [UsuarisController::class, 'showpass'])->name('usuaris.showpass');
-Route::put('usuaris/updatepass', [UsuarisController::class, 'updatePassword'])->name('usuaris.updatePassword');
+Route::put('usuaris/updatepass/{usuari}', [UsuarisController::class, 'updatePassword'])->name('usuaris.updatePassword');
 Route::resource('usuaris', UsuarisController::class);
 
 

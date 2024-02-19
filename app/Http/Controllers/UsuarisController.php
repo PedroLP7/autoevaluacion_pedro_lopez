@@ -141,7 +141,7 @@ public function updatePassword(Request $request, usuaris $usuari){
     $currentpassword = $request->input('currentContrasenya');
 
 
-    dd($usuari);
+
 
     if (Hash::check($currentpassword, $usuari->contrasenya)) {
         $newPassword = bcrypt($request->input('newContrasenya'));
