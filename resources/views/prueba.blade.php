@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-{{ "hola"}}
+{{ "hola esto es la prueba"}}
 
 <button class="btn btn-primary">PRUEBA</button>
 @endsection

@@ -40,7 +40,7 @@
                      Datos Maestros
                     </a>
                     <ul class="dropdown-menu danger">
-                      <li><a class="dropdown-item" href="{{url('admin')}}">Tipos de usuario</a></li>
+                      <li><a class="dropdown-item" href="{{url('/usuaris/create')}}">Tipos de usuario</a></li>
                       <li><a class="dropdown-item" href="{{url('/usuaris')}}">Usuarios</a></li>
                       <li><a class="dropdown-item" href="{{url('modul')}}">Ciclos</a></li>
                         <li><a class="dropdown-item" href="{{url('modul')}}">Modulos</a></li>

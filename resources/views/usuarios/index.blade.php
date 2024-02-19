@@ -4,6 +4,8 @@
 
 @include('php_partials.mensajes')
 
+<a class="btn btn-primary mt-3" href="{{url('usuaris/create')}}">Nuevo Usuario</a>
+
 
 <table class="table">
 
@@ -43,7 +45,22 @@
                 <button class="btn btn-primary" type="submit">Editar</button>
 </form></td>
 
+<td> <form method="POST" action="{{ action([App\Http\Controllers\UsuarisController::class, 'destroy'], ['usuari' => $usuario]) }}">
+    @method('DELETE')
 
+    @csrf
+
+                <button class="btn btn-danger" type="submit">Eliminar</button>
+</form></td>
+
+<td> <form method="GET" action="{{ action([App\Http\Controllers\UsuarisController::class, 'showpass'], ['usuari' => $usuario]) }}">
+
+
+    @csrf
+
+                <button class="btn btn-primary" type="submit">EditarContraseña</button>
+</form>
+</td>
 
 
 
@@ -52,7 +69,7 @@
      @endforeach
     </table>
 
-
+{{$usuaris->links()}}
 
 @endsection
 
