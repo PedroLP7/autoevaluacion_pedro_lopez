@@ -167,6 +167,10 @@ public function updatePassword(Request $request, usuaris $usuari){
 
 
     public function showLogin(){
+
+
+
+
         return view('auth.login');
 
     }
@@ -184,8 +188,8 @@ public function updatePassword(Request $request, usuaris $usuari){
 
         if($user !=null && Hash::check($password, $user->contrasenya)){
         Auth::login($user);
-            $response = redirect('/');
-            request()->session()->flash('mensaje', 'Bienvenido ' . $user->realName);
+            $response = redirect('/home');
+            request()->session()->flash('mensaje', 'Bienvenido ' . $user->nom_usuari);
 
         }else{
             $request->session()->flash('error', 'Usuario o contraseña incorrectos');
@@ -199,6 +203,7 @@ public function updatePassword(Request $request, usuaris $usuari){
 
 public function logout(){
     Auth::logout();
+    session()->flash('mensaje', 'Sesión cerrada correctamente');
     return redirect('/');
 }
 

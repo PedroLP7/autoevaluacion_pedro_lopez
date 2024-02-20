@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
 
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="{{url('/')}}">
                   <img src="{{ asset('img/logo.png') }}" id="imglogo" alt="logia" width="30" height="24" class="d-inline-block align-text-top">
 
                 </a>
@@ -33,7 +33,7 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
 {{-- cambiar esto a un 3 para que sea para el admin  --}}
-                @if (Auth::check()&&Auth::user()->tipus_usuaris_id==3)
+                @if (Auth::check()&&Auth::user()->tipus_usuaris_id==1)
                 <li class="nav-item dropdown  ">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Datos Maestros
@@ -75,7 +75,7 @@
                     @endif
 
 
-                    @if (Auth::check()&&Auth::user()->tipus_usuaris_id==1)
+                    @if (Auth::check()&&Auth::user()->tipus_usuaris_id==3)
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Alumnos                 </a>
