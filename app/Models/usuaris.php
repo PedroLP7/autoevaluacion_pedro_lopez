@@ -1,13 +1,18 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
-class usuaris extends Model
-{
-    use HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+
+
+
+class usuaris extends Authenticable{
+    use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'usuaris';
     protected $primaryKey = 'id';
 

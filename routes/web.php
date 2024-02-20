@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::get('usuaris/{usuari}/showpass', [UsuarisController::class, 'showpass'])->name('usuaris.showpass');
 Route::put('usuaris/updatepass/{usuari}', [UsuarisController::class, 'updatePassword'])->name('usuaris.updatePassword');
 Route::resource('usuaris', UsuarisController::class);
+Route::get('/loginForm',[UsuarisController::class, 'showLogin'])->name('loginForm');
+route::post('/login',[UsuarisController::class, 'login'])->name('login');
+route::get('/logout',[UsuarisController::class, 'logout'])->name('logout');
+
 
 
 

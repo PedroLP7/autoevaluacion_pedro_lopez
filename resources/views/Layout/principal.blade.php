@@ -32,9 +32,8 @@
 
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-
-
-
+{{-- cambiar esto a un 3 para que sea para el admin  --}}
+                @if (Auth::check()&&Auth::user()->tipus_usuaris_id==3)
                 <li class="nav-item dropdown  ">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Datos Maestros
@@ -56,41 +55,49 @@
 
                     </ul>
                   </li>
-
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Profesores                  </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{{url('/proveedor/pedidos/')}}">Asignar alumnos</a></li>
-                      <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Resultados de aprendizaje</a></li>
-                        <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Criterios de evaluacion</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="{{url('modul')}}">Autoevaluacion alumnos</a></li>
-
-                    </ul>
-                  </li>
+                  @endif
 
 
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Alumnos                 </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{{url('/proveedor/pedidos/')}}">Autoevaluacion</a></li>
+                    @if (Auth::check()&&Auth::user()->tipus_usuaris_id==2)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profesores                  </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{{url('/proveedor/pedidos/')}}">Asignar alumnos</a></li>
+                          <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Resultados de aprendizaje</a></li>
+                            <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Criterios de evaluacion</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="{{url('modul')}}">Autoevaluacion alumnos</a></li>
+
+                        </ul>
+                      </li>
+
+                    @endif
 
 
-                    </ul>
-                  </li>
+                    @if (Auth::check()&&Auth::user()->tipus_usuaris_id==1)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Alumnos                 </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{{url('/proveedor/pedidos/')}}">Autoevaluacion</a></li>
+
+
+                        </ul>
+                      </li>
+                    @endif
+
 
 
 
 
             </ul>
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0 p-3">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0 p-2 m-3">
                 @if (Auth::check())
                 <li class="nav-item">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{Auth::user()->realName}} {{Auth::user()->surname1}}
+                          {{Auth::user()->nom}} {{Auth::user()->cognom}}
                         </a>
                         <ul class="dropdown-menu">
                           <li> <a href="{{url('logout')}}" class="nav-link">Logout</a></li>
@@ -104,7 +111,7 @@
 
                 @else
                 <li class="nav-item">
-                    <a href="{{url('login')}}" class="nav-link">Login</a>
+                    <a href="{{url('/loginForm')}}" class="nav-link">Login</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{url('register')}}" class="nav-link">Register</a>

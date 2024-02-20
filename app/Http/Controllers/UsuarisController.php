@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tipus_usuaris;
 use App\Models\usuaris;
-use Brick\Math\Internal\Calculator\BcMathCalculator;
 use Illuminate\Http\Request;
+use App\Models\tipus_usuaris;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Brick\Math\Internal\Calculator\BcMathCalculator;
 
 
 class UsuarisController extends Controller
@@ -162,4 +163,44 @@ public function updatePassword(Request $request, usuaris $usuari){
     public function prueba(){
         return view('prueba');
     }
+
+
+
+    public function showLogin(){
+        return view('auth.login');
+
+    }
+
+
+
+
+    public function login(Request $request){
+
+
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $user = usuaris::where('nom_usuari', $username)->first();
+
+        if($user !=null && Hash::check($password, $user->contrasenya)){
+        Auth::login($user);
+            $response = redirect('/');
+            request()->session()->flash('mensaje', 'Bienvenido ' . $user->realName);
+
+        }else{
+            $request->session()->flash('error', 'Usuario o contraseña incorrectos');
+            //  $request->session()->flash($username,$password);
+        $response = redirect('/loginForm')->withInput();
+        }
+        return $response;
+
+}
+
+
+public function logout(){
+    Auth::logout();
+    return redirect('/');
+}
+
+
 }
