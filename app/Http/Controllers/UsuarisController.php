@@ -80,7 +80,7 @@ class UsuarisController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, usuaris $usuari){
-        dd($usuari);
+
         $usuari->nom_usuari = $request->input('nombreUsuario');
         $usuari->contrasenya = $request->input('password');
         $usuari->correu = $request->input('correo');
