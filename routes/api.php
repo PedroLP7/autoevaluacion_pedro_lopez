@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\UsuarisController;
+use App\Http\Controllers\Api\ResultatsAprenentatgeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
+use App\Http\Controllers\Api\UsuarisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +26,8 @@ route::get('usuaris/prueba', [App\Http\Controllers\Api\UsuarisController::class,
 Route::put('usuaris/{usuari}/moduls', [App\Http\Controllers\Api\UsuarisController::class, 'asignarModuls'])->name('usuaris.asignarModuls');
 
 Route::apiResource('usuaris',UsuarisController::class);
+Route::apiResource('resultats_aprenentatge',App\Http\Controllers\Api\ResultatsAprenentatgeController::class);
+Route::apiResource('criteris_avaluacio',App\Http\Controllers\Api\CriterisAvaluacioController::class);
+
+
 

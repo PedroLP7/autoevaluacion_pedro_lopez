@@ -48,8 +48,15 @@ class UsuarisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(usuaris $usuaris)
+    public function destroy(usuaris $usuari)
     {
+        try {
+            $usuari->delete();
+            return response()->json(['message' => 'Usuari eliminat']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'No es pot eliminar un usuari que té moduls assignats']);
+        }
+
 
     }
 
