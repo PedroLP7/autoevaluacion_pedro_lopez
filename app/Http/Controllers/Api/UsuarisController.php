@@ -14,7 +14,7 @@ class UsuarisController extends Controller
      */
     public function index()
     {
-        $usuaris=usuaris::all();
+        $usuaris = Usuaris::with('tipus_usuari')->get();
 
         return UsuarisResource::collection($usuaris);
 
@@ -52,10 +52,17 @@ class UsuarisController extends Controller
     {
         try {
             $usuari->delete();
-            return response()->json(['message' => 'Usuari eliminat']);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'No es pot eliminar un usuari que té moduls assignats']);
+            $response = response()
+            ->json(['message' => 'Usuari esborrat correctament'], 200);
+
+
+        } catch (\Throwable $th) {
+            // $mensaje = Utilidad::errorMessage($th);
+            $response = response()
+            ->json(['error' => 'No se puede borrar el usuario porque tiene modulso relacionados'], 400);
         }
+
+        return $response;
 
 
     }

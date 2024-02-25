@@ -20,6 +20,15 @@ Route::get('/', function () {
     return view('prueba');
 });
 
+
+
+
+
+
+Route::get('/usuariosp',function(){
+    return view('usuaris.index');
+})->name('usuariosp');
+
 Route::get('/loginForm',[UsuarisController::class, 'showLogin'])->name('login');
 route::post('/login',[UsuarisController::class, 'login']);
 route::get('/logout',[UsuarisController::class, 'logout'])->name('logout');
