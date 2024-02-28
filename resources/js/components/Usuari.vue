@@ -135,31 +135,12 @@
 
 
 </form>
+<span v-if="isError" class="badge text-bg-danger">{{ messageError }}</span>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
+ </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" @click="insertUser"><i class="bi bi-plus-circle"></i> Aceptar</button>
+        <button type="button" class="btn btn-primary" @click="insertUser()"><i class="bi bi-plus-circle"></i> Aceptar</button>
 
 
       </div>
@@ -184,6 +165,7 @@
 <script>
 import * as bootstrap from 'bootstrap';
 export default {
+    name: 'Usuari',
     data(){
         return {
             usuaris: [],
@@ -228,9 +210,28 @@ export default {
 
         },
         showForm(){
+            this.isError = false;
+            this.usuari = {};
             this.myModal = new bootstrap.Modal('#usuarimodal');
 
             this.myModal.show();
+        },
+        insertUser(){
+            const me = this;
+            axios
+            .post('usuaris', me.usuari)
+            .then(response => {
+                me.selectUsuaris();
+                me.myModal.hide();
+            })
+            .catch(error => {
+                me.isError = true;
+                me.messageError = error.response.data.error;
+                console.log(error.response.data.error);
+            });
+
+
+
         }
     },
     created(){
