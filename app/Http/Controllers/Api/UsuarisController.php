@@ -25,7 +25,28 @@ class UsuarisController extends Controller
      */
     public function store(Request $request)
     {
+        $usuario = new usuaris();
+        $usuario->nom_usuari = $request->input('nombreUsuario');
+        $password =bcrypt($request->input('contrasenya'));
+        $usuario->contrasenya = $password;
+        $usuario->correu = $request->input('correo');
+        $usuario->nom = $request->input('nombre');
+        $usuario->cognom = $request->input('apellido');
+        if($request->input('activo') == "actiu"){
+            $usuario->actiu = 1;
+        }else{$usuario->actiu = 0;}
+        $usuario->tipus_usuaris_id = $request->input('tipoUsuario');
 
+        try {
+            $usuario->save();
+
+            $response =  response()->json(['message' => 'Usuari creat correctament'], 200);
+        } catch (\Throwable $th) {
+
+            $response = response()->json(['error' => 'Nombre de usuario o correo ya existente'], 400);
+
+        }
+        return $response;
     }
 
     /**

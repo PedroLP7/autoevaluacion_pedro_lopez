@@ -3,6 +3,7 @@
 
 
 <div>
+    <button class="btn btn-primary m-3" @click="showForm()"><i class="bi bi-plus-square"></i> Añadir usuario</button>
 <table class="table">
 
 <tr >
@@ -55,6 +56,110 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger" @click="deleteUsuari()"><i class="bi bi-trash"></i>Eliminar</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- modal de insert/update -->
+
+<div class="modal" tabindex="-1" id="usuarimodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Creacion nuevo usu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+
+            <div class="form-group row px-2 mt-3">
+                <label for="nombreUsuario" class="col-sm-2 col-form-label">Nombre Usuario</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" value="" v-model="usuari.nombreUsuario">
+                </div>
+            </div>
+
+            <div class="form-group row px-2 mt-3">
+                <label for="contrasenya" class="col-sm-2 col-form-label">Contraseña</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="contrasenya" name="contrasenya" value="" v-model="usuari.contrasenya">
+                </div>
+            </div>
+            <div class="form-group row mt-3 px-2">
+              <label for="correo" class="col-sm-2 col-form-label">Correo</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="correo" name="correo" value="" v-model="usuari.correo">
+              </div>
+            </div>
+            <div class="form-group row mt-3 px-2">
+                <label for="nombre" class="col-sm-2 col-form-label">nombre</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="nombre" name="nombre" value="" v-model="usuari.nombre">
+                </div>
+            </div>
+            <div class="form-group row mt-3 px-2">
+                <label for="apellido" class="col-sm-2 col-form-label">apellido</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="apellido" name="apellido" value="" v-model="usuari.apellido">
+                </div>
+            </div>
+            <div class="form-group row mt-3 px-2">
+                <label for="tipoUsuario" class="col-sm-2 col-form-label">Tipo Usuario</label>
+                <div class="col-sm-10">
+                <select class="form-select" name="tipoUsuario" id="tipoUsuario" v-model="usuari.tipoUsuario">
+
+                    <option value="1">Administrador</option>
+                    <option value="2">Profesor</option>
+                    <option value="3">Alumno</option>
+
+                </select>
+                </div>
+            </div>
+
+
+            <div class="form-group mt-3">
+                <label class="form-check-label px-2" for="flexCheckChecked">
+                    Activo
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="actiu" id="activo" name="activo" v-model="usuari.activo">
+                </div>
+            </div>
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" @click="insertUser"><i class="bi bi-plus-circle"></i> Aceptar</button>
 
 
       </div>
@@ -121,6 +226,11 @@ export default {
 
         });
 
+        },
+        showForm(){
+            this.myModal = new bootstrap.Modal('#usuarimodal');
+
+            this.myModal.show();
         }
     },
     created(){
