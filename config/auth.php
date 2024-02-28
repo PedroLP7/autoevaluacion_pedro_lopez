@@ -41,6 +41,12 @@ return [
             'provider' => 'users',
         ],
     ],
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'usuaris', // Change 'users' to 'usuaris' or your actual provider name
+        'hash' => false,
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

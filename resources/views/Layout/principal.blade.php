@@ -80,7 +80,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Alumnos                 </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{{url('/proveedor/pedidos/')}}">Autoevaluacion</a></li>
+                          <li><a class="dropdown-item" href="{{url('/alumno/autoevaluacion')}}">Autoevaluacion</a></li>
 
 
                         </ul>

@@ -25,6 +25,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 route::get('usuaris/prueba', [App\Http\Controllers\Api\UsuarisController::class, 'prueba'])->name('usuaris.prueba');
 Route::put('usuaris/{usuari}/moduls', [App\Http\Controllers\Api\UsuarisController::class, 'asignarModuls'])->name('usuaris.asignarModuls');
 
+
+Route::middleware(['web', 'auth'])->group(function () {
+    route::get('getUsuario', [UsuarisController::class, 'getUsuario']);
+});
+
+
+
+
+
+
+
 Route::apiResource('usuaris',UsuarisController::class);
 Route::apiResource('resultats_aprenentatge',App\Http\Controllers\Api\ResultatsAprenentatgeController::class);
 Route::apiResource('criteris_avaluacio',App\Http\Controllers\Api\CriterisAvaluacioController::class);

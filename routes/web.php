@@ -38,7 +38,9 @@ route::post('/login',[UsuarisController::class, 'login']);
 route::get('/logout',[UsuarisController::class, 'logout'])->name('logout');
 
 
-
+Route::get('/alumno/autoevaluacion', function(){
+    return view('alumnos.autoevaluacion');
+});
 
 
 Route::middleware(['auth'])->group(function () {
@@ -47,9 +49,7 @@ Route::middleware(['auth'])->group(function () {
         return view('home');
     })->name('home');
 
-//     Route::get('usuaris/{usuari}/showpass', [UsuarisController::class, 'showpass'])->name('usuaris.showpass');
-// Route::put('usuaris/updatepass/{usuari}', [UsuarisController::class, 'updatePassword'])->name('usuaris.updatePassword');
-// Route::resource('usuaris', UsuarisController::class);
+
 
 
 Route::middleware(['checkAdmin'])->group(function () {

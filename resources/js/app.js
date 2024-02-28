@@ -8,3 +8,7 @@ createApp(usuari).mount('#usuari');
 
 import antonio from './components/antonio.vue'
 createApp(antonio).mount('#antonio');
+
+
+import Moduls from './components/Moduls.vue';
+createApp(Moduls).mount('#modulos');

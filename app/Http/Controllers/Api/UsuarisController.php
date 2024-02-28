@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\usuaris;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UsuarisResource;
 
 class UsuarisController extends Controller
@@ -96,6 +97,19 @@ class UsuarisController extends Controller
         $usuari->moduls()->sync($request->moduls);
 
         return response()->json(['message' => 'Moduls assignats']);
+    }
+
+
+
+
+    public function getUsuario(Request $request)
+    {
+        if (Auth::check()) {
+            $userid = Auth::user()->id;
+            return response()->json([$userid], 200);
+        } else {
+            return response()->json(['error' => 'Usuario no autenticado'], 401);
+        }
     }
 
 

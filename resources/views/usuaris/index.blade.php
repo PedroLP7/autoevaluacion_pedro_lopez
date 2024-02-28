@@ -4,9 +4,7 @@
 
 
 <div id="antonio"></div>
-<div id="usuari" class="container">
-
-</div>
+<div id="usuari" class="container"></div>
 
 
 
