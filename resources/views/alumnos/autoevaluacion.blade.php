@@ -6,6 +6,9 @@
 
 
 
+
+
+
 {{-- <div>{{Auth()->user()->id}}</div> --}}
 
 @endsection

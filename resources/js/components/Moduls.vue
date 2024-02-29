@@ -17,7 +17,7 @@
     <div v-for="modulo in modulos.moduls" :key="modulo.id" class="col-md-4 mb-4">
       <div class="card mt-3">
         <div class="card-body">
-            <button class="btn btn-primary" @click="showAutoevaluacio()">Autoevaluarte</button>
+            <button class="btn btn-primary" @click="showAutoevaluacio(modulo)">Autoevaluarte</button>
           <h5 class="card-title mt-3">Módulo {{ modulo.id }}</h5>
           <p class="card-text">Código: {{ modulo.codi }}</p>
           <p class="card-text">Siglas: {{ modulo.sigles }}</p>
@@ -29,9 +29,10 @@
 </div>
 
 
- <div class="container">
-    <autoeva v-if="showComponente" />
+ <div class="container" id="autoeva">
+    <autoeva v-if="showComponente" :modulo="modulo"/>
  </div>
+
 
 
 </template>
@@ -39,6 +40,8 @@
 <script>
 import axios from 'axios';
 import autoeva from './autoevaluacion.vue';
+
+
 
 export default {
     components: {
@@ -51,7 +54,8 @@ export default {
             usuari: {},
             messageError: '',
             isError: false,
-            showComponente : true,
+            showComponente : false,
+            modulo : {},
         };
     },
     methods: {
@@ -91,10 +95,12 @@ selectModulos() {
 
 
     },
-    showAutoevaluacio() {
-         this.showComponente = true;
+    showAutoevaluacio(selectedModulo) {
+    this.modulo = selectedModulo;
+    this.showComponente = true;
+    console.log(this.modulo);
+},
 
-    },
 },
     created() {
         this.selectUsuario();
