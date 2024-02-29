@@ -98,7 +98,7 @@ selectModulos() {
     showAutoevaluacio(selectedModulo) {
     this.modulo = selectedModulo;
     this.showComponente = true;
-    console.log(this.modulo);
+    // console.log(this.modulo);
 },
 
 },

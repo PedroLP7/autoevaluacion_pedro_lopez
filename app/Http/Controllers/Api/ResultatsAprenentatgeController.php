@@ -14,8 +14,14 @@ class ResultatsAprenentatgeController extends Controller
      */
     public function index()
     {
-        $resultats= resultats_aprenentatge::all();
-        return response()->json($resultats);
+        try {
+            $resultats= resultats_aprenentatge::with('criteris_avaluacio')->get();
+            $response = ResultatsResource::collection($resultats);
+        } catch (\Throwable $th) {
+            $response = response()->json(['message' => 'No s\'han trobat resultats']);
+        }
+
+        return $response;
     }
 
     /**
