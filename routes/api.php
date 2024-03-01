@@ -34,7 +34,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 
 
-Route::get('rubriques/nivell1', [App\Http\Controllers\Api\RubriquesController::class, 'nivell1'])->name('rubriques.nivell1');
+Route::apiResource('moduls',App\Http\Controllers\Api\ModulsController::class);
 Route::apiResource('rubriques',App\Http\Controllers\Api\RubriquesController::class);
 Route::apiResource('usuaris',UsuarisController::class);
 Route::apiResource('resultats_aprenentatge',App\Http\Controllers\Api\ResultatsAprenentatgeController::class);

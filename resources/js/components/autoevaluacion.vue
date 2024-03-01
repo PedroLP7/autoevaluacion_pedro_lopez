@@ -17,21 +17,10 @@
 
 <tbody>
 
-    <tr  v-for="resultado in resultados"  >
-        <td v-if="modulo.id == resultado.moduls_id">{{ resultado.descripcio }}</td>
 
-
-        <div v-for="criteri in resultado.criteris_avaluacio">
-        <td v-if="modulo.id == resultado.moduls_id">{{ criteri.descripcio }}</td>
-
-        </div>
-
-
-        <td>nivel1</td>
-
-
-        <td>nivel2</td>
-        <td>nivel3</td>
+<td>hola</td>
+<td>que</td>
+<td>tal</td>
 
 
 
@@ -45,34 +34,6 @@
 
 
 
-
-
-
-
-
-
-        <td v-if="modulo.id == resultado.moduls_id">
-
-            <select name="rubrica" id="rubrica" class="form-select">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-
-        </td>
-
-
-
-
-
-
-
-
-
-
-
-
-    </tr>
 
 
 
@@ -150,30 +111,8 @@ export default {
 },
 
 
-selectCriteris(){
-axios
-.get('rubriques')
-.then(response => {
-    this.criteris = response.data;
-    // console.log(this.criteris);
-})
-.catch(error => {
-    console.error(error.response.data.error);
-});
 
-},
-selectNivell1(){
-    axios
-    .get('rubriques/nivell1')
-    .then(response => {
-        this.nivell1 = response.data;
-        console.log(this.nivell1);
-    })
-    .catch(error => {
-        console.error(error.response.data.error);
-    });
 
-},
 
 
 

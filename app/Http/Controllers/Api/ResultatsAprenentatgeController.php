@@ -9,6 +9,21 @@ use App\Http\Resources\ResultatsResource;
 
 class ResultatsAprenentatgeController extends Controller
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      */
