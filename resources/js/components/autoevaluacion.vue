@@ -7,50 +7,52 @@
 <table class="table mt-3 table-bordered border-primary align-middle">
 
 <tr  class="">
-  <th  class="col-3 " scope="col">Resultados aprendizaje</th>
-  <th   scope="col" class="col-2">Criteris evaluacion(3)</th>
-  <th class="col-1" scope="col">Nivel 1</th>
-  <th class="col-1" scope="col">Nivel2</th>
-  <th class="1" scope="col">Nivel 3</th>
+  <!-- <th  class="col-12 " scope="col">Resultados aprendizaje</th> -->
+  <th   scope="col-6" class="col-6">Criteris evaluacion</th>
+  <th class="col-2" scope="col-3"> </th>
+  <th class="col-2" scope="col-3"></th>
+  <th class="col-2" scope="col-3"> </th>
   <th class="col-1">Autoevaluacion</th>
 </tr>
 
 <tbody>
 
-<tr v-for="resultado in resultados.resultats_aprenentatge">
-    <td >{{resultado.descripcio}}</td>
-</tr>
+    <template v-for="resultado in resultados.resultats_aprenentatge">
+        <tr>
+            <td colspan="5" ><strong>RA : {{resultado.descripcio}}</strong></td>
+        </tr>
 
-<tr v-for="criteri in resultados.criteris_avaluacio" :key="criteri.id">
-      <td>{{ criteri.descripcio }}</td>
-    </tr>
+                <template v-for="criteri in resultado.criteris_avaluacio" :key="criteri.id" >
+                    <tr>
+                    <td> <strong>Criteri {{ criteri.ordre }}</strong>
+                        <br> {{ criteri.descripcio }}</td>
 
+                    <td v-for="rubrica in criteri.rubriques" >
+                     <strong>Nivel {{rubrica.nivell  }}</strong>
+                        <br>
+                        {{  rubrica.descripcio  }}
+                    </td>
+                    <td><select class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select></td>
+                </tr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </template>
 
 
 
-</tbody>
+        </template>
+
+
+        </tbody>
 
 </table>
 
 
     </div>
+    <button class="btn btn-primary">CONFIRMAR</button>
 
 </form>
 
@@ -69,6 +71,8 @@
  {{ modulo.codi }}
     {{ modulo.sigles }}
     {{ modulo.nom }}
+    <br>
+    {{'idusuari' + idUsuari }}
 
 
 
@@ -81,6 +85,8 @@ import axios from 'axios';
 export default {
     props: {
     modulo: Object,
+     selectedModuleId: Number,
+        idUsuari: Number,
   },
   name: 'autoeva',
   data() {
@@ -90,13 +96,14 @@ export default {
       messageError: '',
       isError: false,
 
+
     };
   },
 
   methods: {
     selectResultados() {
     const me = this;
-    axios.get('moduls/7' )
+    axios.get('moduls/'+this.selectedModuleId )
         .then(response => {
             me.resultados = response.data;
              console.log(me.resultados);
@@ -120,6 +127,14 @@ export default {
 
 
 
+
+  },
+  watch: {
+    selectedModuleId: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.selectResultados();
+      }
+    },
   },
   mounted () {
     // console.log('hola');

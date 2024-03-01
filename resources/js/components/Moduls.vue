@@ -5,10 +5,6 @@
 
 
 
-        <!-- <div> ESTE ES EL ID  {{ usuari }}</div> -->
-
-        <!-- modulos: {{ modulos }} -->
-        <!-- <div>{{modulos.moduls}}</div> -->
 
 
         <div class="container mt-3 modulos">
@@ -22,6 +18,7 @@
           <p class="card-text">Código: {{ modulo.codi }}</p>
           <p class="card-text">Siglas: {{ modulo.sigles }}</p>
           <p class="card-text">Nombre: {{ modulo.nom }}</p>
+          <!-- <p>ID USU {{  modulos.id}}</p> -->
         </div>
       </div>
     </div>
@@ -30,7 +27,7 @@
 
 
  <div class="container" id="autoeva">
-    <autoeva v-if="showComponente" :modulo="modulo"/>
+    <autoeva v-if="showComponente" :modulo="modulo" :selectedModuleId="modulo.id"  :idUsuari="modulos.id"/>
  </div>
 
 
