@@ -17,10 +17,15 @@
 
 <tbody>
 
+<tr v-for="resultado in resultados.resultats_aprenentatge">
+    <td >{{resultado.descripcio}}</td>
+</tr>
 
-<td>hola</td>
-<td>que</td>
-<td>tal</td>
+<tr v-for="criteri in resultados.criteris_avaluacio" :key="criteri.id">
+      <td>{{ criteri.descripcio }}</td>
+    </tr>
+
+
 
 
 
@@ -81,22 +86,21 @@ export default {
   data() {
     return {
         resultados: [],
-        resultsdosFiltrados: [],
+
       messageError: '',
       isError: false,
-      criteris: [],
-        nivell1: [],
+
     };
   },
 
   methods: {
     selectResultados() {
     const me = this;
-    axios.get('resultats_aprenentatge')
+    axios.get('moduls/7' )
         .then(response => {
             me.resultados = response.data;
-            //  console.log(me.resultados);
-            //  console.log('hola');
+             console.log(me.resultados);
+
 
 
 
@@ -120,8 +124,6 @@ export default {
   mounted () {
     // console.log('hola');
         this.selectResultados();
-        this.selectCriteris();
-        this.selectNivell1();
 
 
 
