@@ -87,4 +87,6 @@ class CriterisAvaluacioController extends Controller
         $criteris_avaluacio->delete();
         return response()->json(['message' => 'Criteri eliminat']);
     }
+
+
 }

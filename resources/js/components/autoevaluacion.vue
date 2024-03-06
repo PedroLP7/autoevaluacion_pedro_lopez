@@ -24,7 +24,7 @@
 
                 <template v-for="criteri in resultado.criteris_avaluacio" :key="criteri.id" >
                     <tr>
-                    <td> <strong>Criteri {{ criteri.ordre }}</strong>
+                    <td> <strong>Criteri {{ criteri.id }}</strong>
                         <br> {{ criteri.descripcio }}</td>
 
                     <td v-for="rubrica in criteri.rubriques" >
@@ -32,7 +32,7 @@
                         <br>
                         {{  rubrica.descripcio  }}
                     </td>
-                    <td><select class="form-select">
+                    <td><select class="form-select" v-model="insert[criteri.id]" >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -95,6 +95,7 @@ export default {
 
       messageError: '',
       isError: false,
+      insert : {},
 
 
     };

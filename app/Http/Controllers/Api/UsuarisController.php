@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\criteris_avaluacio;
 use App\Models\usuaris;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -113,5 +114,18 @@ class UsuarisController extends Controller
     }
 
 
+    public function setNotas(Request $request,  usuaris $usuari){
+        try {
+
+            $usuari->criteris_avaluacio()->attach($request->criteri_avaluacio_id, ['nota' => $request->nota]);
+            return response()->json(['message' => 'Nota insertada correctamente'], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al insertar la nota', + $th], 400);
+        }
+
+
+
+    }
 
 }

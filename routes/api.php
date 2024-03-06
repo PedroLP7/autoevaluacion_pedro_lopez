@@ -33,6 +33,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 
 
+Route::put('usuaris/{usuari}/setNotas', [App\Http\Controllers\Api\UsuarisController::class, 'setNotas'])->name('usuaris.setNotas');
 
 Route::apiResource('moduls',App\Http\Controllers\Api\ModulsController::class);
 Route::apiResource('rubriques',App\Http\Controllers\Api\RubriquesController::class);
