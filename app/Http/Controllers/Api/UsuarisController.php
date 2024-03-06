@@ -28,12 +28,12 @@ class UsuarisController extends Controller
     public function store(Request $request)
     {
         $usuario = new usuaris();
-        $usuario->nom_usuari = $request->input('nombreUsuario');
+        $usuario->nom_usuari = $request->input('nom_usuari');
         $password =bcrypt($request->input('contrasenya'));
         $usuario->contrasenya = $password;
-        $usuario->correu = $request->input('correo');
-        $usuario->nom = $request->input('nombre');
-        $usuario->cognom = $request->input('apellido');
+        $usuario->correu = $request->input('correu');
+        $usuario->nom = $request->input('nom');
+        $usuario->cognom = $request->input('cognom');
         if($request->input('activo') == "actiu"){
             $usuario->actiu = 1;
         }else{$usuario->actiu = 0;}
@@ -121,11 +121,24 @@ class UsuarisController extends Controller
             return response()->json(['message' => 'Nota insertada correctamente'], 200);
 
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Error al insertar la nota', + $th], 400);
+            return response()->json(['error' => 'Error al insertar la nota', $th], 400);
         }
 
 
 
+    }
+
+
+    // public function getNotas(usuaris $usuari){
+    //     $notas = $usuari->criteris_avaluacio;
+    //     return response()->json($notas, 200);
+    // }
+
+
+    public function getNotas(usuaris $usuari)
+    {
+        $usuari = usuaris::with('criteris_avaluacio')->find($usuari->id);
+        return new UsuarisResource($usuari);
     }
 
 }

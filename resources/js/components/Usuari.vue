@@ -28,7 +28,7 @@
  <td>{{usuari.cognom}}</td>
     <td><input type="checkbox" :checked="usuari.actiu"></td>
     <td>{{ usuari.tipus_usuari.tipus }}</td>
-    <td><button class="btn btn-primary"><i class="bi bi-pencil-square"></i>Editadura</button></td>
+    <td><button class="btn btn-primary" @click ="editUsuari(usuari)"> <i class="bi bi-pencil-square"></i> Editadura</button></td>
     <td><button class="btn btn-danger" @click="confirmDelete(usuari)"><i class="bi bi-trash"></i>Delete</button></td>
 
 
@@ -81,7 +81,7 @@
             <div class="form-group row px-2 mt-3">
                 <label for="nombreUsuario" class="col-sm-2 col-form-label">Nombre Usuario</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" value="" v-model="usuari.nombreUsuario">
+                    <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario"  v-model="usuari.nom_usuari">
                 </div>
             </div>
 
@@ -94,31 +94,34 @@
             <div class="form-group row mt-3 px-2">
               <label for="correo" class="col-sm-2 col-form-label">Correo</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="correo" name="correo" value="" v-model="usuari.correo">
+                <input type="text" class="form-control" id="correo" name="correo" value="" v-model="usuari.correu">
               </div>
             </div>
             <div class="form-group row mt-3 px-2">
                 <label for="nombre" class="col-sm-2 col-form-label">nombre</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="nombre" name="nombre" value="" v-model="usuari.nombre">
+                  <input type="text" class="form-control" id="nombre" name="nombre" value="" v-model="usuari.nom">
                 </div>
             </div>
             <div class="form-group row mt-3 px-2">
                 <label for="apellido" class="col-sm-2 col-form-label">apellido</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="apellido" name="apellido" value="" v-model="usuari.apellido">
+                  <input type="text" class="form-control" id="apellido" name="apellido" value="" v-model="usuari.cognom">
                 </div>
             </div>
             <div class="form-group row mt-3 px-2">
                 <label for="tipoUsuario" class="col-sm-2 col-form-label">Tipo Usuario</label>
                 <div class="col-sm-10">
-                <select class="form-select" name="tipoUsuario" id="tipoUsuario" v-model="usuari.tipoUsuario">
+                    <select class="form-select" name="tipus_usuaris_id" id="tipus_usuaris_id" v-model="usuari.tipus_usuaris_id">
+          <option v-for="tipus in tipus_usuaris" :value="tipus.id">{{ tipus.tipus }} {{ tipus.id }} {{ usuari.tipus_usuaris_id }}</option>
+        </select>
 
-                    <option value="1">Administrador</option>
-                    <option value="2">Profesor</option>
-                    <option value="3">Alumno</option>
 
-                </select>
+
+                <!-- <select name="tipoUsu" id="tipoUsu"  v-model="usuari.tipoUsuario">
+
+                </select> -->
+
                 </div>
             </div>
 
@@ -128,7 +131,7 @@
                     Activo
                 </label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="actiu" id="activo" name="activo" v-model="usuari.activo">
+                    <input class="form-check-input" type="checkbox" value="actiu" id="activo" name="activo" v-model="usuari.actiu" :checked="usuari.actiu">
                 </div>
             </div>
 
@@ -173,6 +176,7 @@ export default {
             usuari: {},
             messageError : '',
             isError : false,
+            tipus: {},
         }
     },
     methods: {
@@ -185,6 +189,22 @@ export default {
                 me.usuaris = response.data;
 
             });
+        },
+        selectTipusUsuaris(){
+            const me = this;
+            axios
+            .get('tipus_usuaris')
+            .then(response => {
+
+                me.tipus_usuaris = response.data;
+
+            });
+        },
+        editUsuari(usuari){
+            this.usuari = usuari;
+            this.myModal = new bootstrap.Modal('#usuarimodal');
+            this.myModal.show();
+
         },
         confirmDelete(usuari){
             this.usuari = usuari;
@@ -236,6 +256,7 @@ export default {
     },
     created(){
         this.selectUsuaris();
+        this.selectTipusUsuaris();
     },
 
     }
