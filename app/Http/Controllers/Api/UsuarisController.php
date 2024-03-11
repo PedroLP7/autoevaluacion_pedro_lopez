@@ -37,7 +37,7 @@ class UsuarisController extends Controller
         if($request->input('activo') == "actiu"){
             $usuario->actiu = 1;
         }else{$usuario->actiu = 0;}
-        $usuario->tipus_usuaris_id = $request->input('tipoUsuario');
+        $usuario->tipus_usuaris_id = $request->input('tipus_usuaris_id');
 
         try {
             $usuario->save();
@@ -45,7 +45,7 @@ class UsuarisController extends Controller
             $response =  response()->json(['message' => 'Usuari creat correctament'], 200);
         } catch (\Throwable $th) {
 
-            $response = response()->json(['error' => 'Nombre de usuario o correo ya existente'], 400);
+            $response = response()->json(['error' => 'Nombre de usuario o correo ya existente',$th], 400);
 
         }
         return $response;

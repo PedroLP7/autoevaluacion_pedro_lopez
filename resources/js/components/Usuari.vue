@@ -131,7 +131,7 @@
                     Activo
                 </label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="actiu" id="activo" name="activo" v-model="usuari.actiu" :checked="usuari.actiu">
+                    <input class="form-check-input" type="checkbox" value="actiu" id="activo" name="activo" :checked="usuari.actiu">
                 </div>
             </div>
 

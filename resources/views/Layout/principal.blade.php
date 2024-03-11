@@ -67,7 +67,7 @@
                           <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Resultados de aprendizaje</a></li>
                             <li><a class="dropdown-item" href="{{url('/proveedor/crearmenu')}}">Criterios de evaluacion</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="{{url('modul')}}">Autoevaluacion alumnos</a></li>
+                          <li><a class="dropdown-item" href="{{url('profesor/eva')}}">Autoevaluacion alumnos</a></li>
 
                         </ul>
                       </li>

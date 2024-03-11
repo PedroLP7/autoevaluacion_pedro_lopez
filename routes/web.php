@@ -76,6 +76,11 @@ Route::middleware(['checkProfe'])->group(function () {
     })->name('welcome');
 
 
+    route::get('/profesor/eva', function () {
+        return view('profesores.verEvaluaciones');
+    })->name('profesor');
+
+
 
 });
 
