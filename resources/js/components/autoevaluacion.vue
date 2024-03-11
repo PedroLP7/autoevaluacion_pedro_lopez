@@ -32,7 +32,7 @@
                         <br>
                         {{  rubrica.descripcio  }}
                     </td>
-                    <td><select class="form-select" v-model="insert[criteri.id]" >
+                    <td><select class="form-select" v-model="notas[criteri.id]" >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -52,7 +52,7 @@
 
 
     </div>
-    <button class="btn btn-primary">CONFIRMAR</button>
+    <button  type="button" @click="setNotas()" class="btn btn-primary">CONFIRMAR</button>
 
 </form>
 
@@ -95,7 +95,7 @@ export default {
 
       messageError: '',
       isError: false,
-      insert : {},
+      notas : {},
 
 
     };
@@ -120,7 +120,26 @@ export default {
         });
 
 
-},
+},setNotas() {
+    const me = this;
+
+
+    console.log('id usuari' + me.idUsuari);
+
+    // Convert the notas object to an array of objects with criteri_avaluacio_id and nota
+    const notasArray = Object.entries(me.notas).map(([criteri_avaluacio_id, nota]) => ({ criteri_avaluacio_id, nota }));
+
+    axios.put('usuaris/' + me.idUsuari + '/setNotas/', { notas: notasArray })
+     .then(response => {
+            me.resultados = response.data;
+            console.log(me.resultados);
+        })
+        .catch(error => {
+            me.isError = true;
+            me.messageError = error.response.data.error;
+            console.error(error.response.data.error);
+        });
+}
 
 
 

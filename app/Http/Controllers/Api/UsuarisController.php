@@ -114,19 +114,27 @@ class UsuarisController extends Controller
     }
 
 
-    public function setNotas(Request $request,  usuaris $usuari){
+    public function setNotas(Request $request, usuaris $usuari){
         try {
+            $notas = $request->input('notas');
 
-            $usuari->criteris_avaluacio()->attach($request->criteri_avaluacio_id, ['nota' => $request->nota]);
-            return response()->json(['message' => 'Nota insertada correctamente'], 200);
+            // recorro las notas y las guardo en un array con el id del criterio como clave
+
+            $criterisAvaluacioData = [];
+            foreach ($notas as $nota) {
+                $criterisAvaluacioData[$nota['criteri_avaluacio_id']] = ['nota' => $nota['nota']];
+            }
+
+            // uso el syncWithoutDetaching para que no se borren las notas anteriores y añadir y updatear las nuevas
+            $usuari->criteris_avaluacio()->syncWithoutDetaching($criterisAvaluacioData);
+
+            return response()->json(['message' => 'Notas insertadas o actualizadas correctamente'], 200);
 
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Error al insertar la nota', $th], 400);
+            return response()->json(['error' => 'Error al insertar o actualizar las notas', 'details' => $th->getMessage()], 400);
         }
-
-
-
     }
+
 
 
     // public function getNotas(usuaris $usuari){
