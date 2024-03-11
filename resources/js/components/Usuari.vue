@@ -118,9 +118,7 @@
 
 
 
-                <!-- <select name="tipoUsu" id="tipoUsu"  v-model="usuari.tipoUsuario">
 
-                </select> -->
 
                 </div>
             </div>

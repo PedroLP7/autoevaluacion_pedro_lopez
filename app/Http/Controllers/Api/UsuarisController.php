@@ -149,4 +149,17 @@ class UsuarisController extends Controller
         return new UsuarisResource($usuari);
     }
 
+
+
+     public function index2(){
+
+
+        $usuaris = Usuaris::where('tipus_usuaris_id', 3)->with('criteris_avaluacio')->get();
+
+
+        return UsuarisResource::collection($usuaris);
+
+
+     }
+
 }
