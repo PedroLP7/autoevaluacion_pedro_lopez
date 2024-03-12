@@ -5,6 +5,10 @@
         <div>
             <div class="mt-3" v-for="modul in usuari.moduls" :key="modul.id">
                <button class="btn btn-primary">{{modul.codi+' ' + modul.sigles +' ' +modul.nom}}</button>
+               <div v-for="resultats in modul.resultats_aprenentatge">
+               {{resultats.id }}   {{ resultats.descripcio }}
+
+               </div>
             </div>
         </div>
 
@@ -24,6 +28,10 @@ export default {
 
 
         };
+    },
+    methods:{
+
+
     },
     created() {
 
