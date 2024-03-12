@@ -3,7 +3,7 @@
         usuario: {{usuari.nom_usuari}}
         <!-- modulos : {{ usuari.moduls }} -->
         <div>
-            <div v-for="modul in usuari.moduls" :key="modul.id">
+            <div class="mt-3" v-for="modul in usuari.moduls" :key="modul.id">
                <button class="btn btn-primary">{{modul.codi+' ' + modul.sigles +' ' +modul.nom}}</button>
             </div>
         </div>
