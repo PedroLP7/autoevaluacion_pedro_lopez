@@ -1,18 +1,20 @@
-<template >
-     <div>
-
-
-
-
-
-        <div v-for="usuari in usuaris" class="col-md-4 mb-4 col-xl-6" >
-      <div class="card mt-3">
-        <div class="card-body">
-
-          <h5 class="card-title mt-3"> Usuario : {{ usuari.nom_usuari }}</h5>
-            <p class="card-text">ID: {{ usuari.id }}</p>
-          <button @click="mostrarModulos(usuari)" class="btn btn-primary">Ver modulos de  {{ usuari.nom_usuari }}</button>
-            <!-- <div v-for="criteris in usuari.criteris_avaluacio">
+<template>
+    <div>
+        <div class="row">
+        <div v-for="usuari in usuaris" class="col-md-4 mb-4 col-xl-4">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title mt-3">
+                        Usuario : {{ usuari.nom_usuari }}
+                    </h5>
+                    <p class="card-text">ID: {{ usuari.id }}</p>
+                    <button
+                        @click="mostrarModulos(usuari)"
+                        class="btn btn-primary"
+                    >
+                        Ver modulos de {{ usuari.nom_usuari }}
+                    </button>
+                    <!-- <div v-for="criteris in usuari.criteris_avaluacio">
                 <p class="card-text" >Criterio : {{ criteris.id}}
                     Nota : {{ criteris.pivot.nota }}
                     <br>
@@ -21,14 +23,63 @@
 
 
             </div> -->
-
-
-
+                </div>
+            </div>
         </div>
+        </div>
+
+
+
+
+
+
+
+ <div class="modal" tabindex="-1" id="modulosmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modulos de {{ usuari.nom +' '+usuari.cognom }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="container" id="Modulos2">
+    <Modulos2 v-if="showComponente" :usuari="usuari" />
+ </div>
+
+
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" ><i class="bi bi-plus-circle"></i> Aceptar</button>
+
+
       </div>
     </div>
+  </div>
+</div>
 
-    <modulsProfesores :usuari="usuari" v-if="showModuls"></modulsProfesores>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -38,47 +89,47 @@
     </div>
 </template>
 <script>
-import * as bootstrap from 'bootstrap';
-import modulsProfesores from './modulsProfesores.vue';
+import * as bootstrap from "bootstrap";
+import axios from "axios";
+
+import Modulos2 from './Modulos2.vue';
+
 export default {
-    name: 'alumnos',
-    data(){
+    components: {
+    Modulos2
+  },
+    name: "alumnos",
+    data() {
         return {
+            usuaris: [],
+            messageError: "",
+            isError: false,
+            showComponente: false,
+            usuari : {}
 
-            usuaris : [],
-            messageError : '',
-            isError : false,
-            showModuls : false,
-
-        }
+        };
     },
     methods: {
-        selectUsuaris(){
+        selectUsuaris() {
             const me = this;
-            axios
-            .get('usuaris/alumnes')
-            .then(response => {
-
+            axios.get("usuaris/alumnes").then((response) => {
                 me.usuaris = response.data;
-
             });
         },
-        mostrarModulos(usuari){
-            console.log(usuari);
+        mostrarModulos(usuari) {
+            this.usuari = usuari;
 
-            this.showModuls = true;
-        }
+            this.myModal = new bootstrap.Modal('#modulosmodal');
+            // console.log(usuari);
 
+            this.showComponente = true;
+            this.myModal.show();
         },
-
-
-    created(){
-        this.selectUsuaris();
-
     },
 
-    }
-
-
+    created() {
+        this.selectUsuaris();
+    },
+};
 </script>
-<style></style>
+<style></style>./Modulos2.vue
