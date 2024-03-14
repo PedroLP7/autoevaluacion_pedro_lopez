@@ -2,17 +2,28 @@
     <div>
         usuario: {{usuari.nom_usuari}}
         <!-- modulos : {{ usuari.moduls }} -->
-        <div>
-            <div class="mt-3" v-for="modul in usuari.moduls" :key="modul.id">
-               <button class="btn btn-primary">{{modul.codi+' ' + modul.sigles +' ' +modul.nom}}</button>
-               <div v-for="resultats in modul.resultats_aprenentatge">
-               {{resultats.id }}   {{ resultats.descripcio }}
 
-               </div>
-            </div>
+
+
+
+        <div v-for="nota in nota.criteris_avaluacio">
+            {{ nota.pivot.nota }}
+
+
         </div>
 
+        <div v-for="resultats in modul.resultats_aprenentatge">
+        <!-- {{ resultats.descripcio }} -->
+        <div v-for="criteris in resultats.criteris_avaluacio">
+          {{ criteris.id }}  {{criteris.descripcio}}
+
+        </div>
+
+
     </div>
+
+    </div>
+
 </template>
 <script>
 
@@ -20,7 +31,9 @@
 export default {
     name: "Modulos2",
     props :{
-        usuari : Object
+        usuari : Object,
+        nota : Object,
+        modul : Object
 
     },
     data() {

@@ -8,21 +8,19 @@
                         Usuario : {{ usuari.nom_usuari }}
                     </h5>
                     <p class="card-text">ID: {{ usuari.id }}</p>
-                    <button
-                        @click="mostrarModulos(usuari)"
+                    <!-- <button
+                        @click="mostrarNotas(usuari),getNotas(usuari.id)"
                         class="btn btn-primary"
                     >
                         Ver modulos de {{ usuari.nom_usuari }}
-                    </button>
-                    <!-- <div v-for="criteris in usuari.criteris_avaluacio">
-                <p class="card-text" >Criterio : {{ criteris.id}}
-                    Nota : {{ criteris.pivot.nota }}
-                    <br>
-
-                </p>
+                    </button> -->
 
 
-            </div> -->
+                    <div class="mt-3" v-for="modul in usuari.moduls" :key="modul.id">
+               <button  @click=" mostrarNotas(usuari,modul),getNotas(usuari.id)"class="btn btn-primary">{{modul.codi+' ' + modul.sigles }}</button>
+
+            </div>
+
                 </div>
             </div>
         </div>
@@ -45,7 +43,7 @@
 
 
         <div class="container" id="Modulos2">
-    <Modulos2 v-if="showComponente" :usuari="usuari" />
+    <Modulos2 v-if="showComponente" :usuari="usuari" :nota="nota" :modul="modul" />
  </div>
 
 
@@ -105,7 +103,8 @@ export default {
             messageError: "",
             isError: false,
             showComponente: false,
-            usuari : {}
+            usuari : {},
+            nota :{}
 
         };
     },
@@ -116,8 +115,10 @@ export default {
                 me.usuaris = response.data;
             });
         },
-        mostrarModulos(usuari) {
+        mostrarNotas(usuari,modul) {
             this.usuari = usuari;
+            this.modul = modul;
+            console.log(modul);
 
             this.myModal = new bootstrap.Modal('#modulosmodal');
             // console.log(usuari);
@@ -125,6 +126,15 @@ export default {
             this.showComponente = true;
             this.myModal.show();
         },
+        getNotas(usuari){
+            const me = this;
+           axios.get('usuaris/' + usuari +'/getNotas').then((response) => {
+                // console.log(response.data);
+                me.nota = response.data;
+
+            });
+
+        }
     },
 
     created() {
